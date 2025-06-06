@@ -20,7 +20,7 @@ const sendEmail = async ({ to, subject, html }) => {
 
 module.exports = {
   sendResetEmail: async (to, token) => {
-    const resetLink = `http://localhost:8080/reset-password/${token}`;
+    const resetLink = `https://tripnest-8vo9.onrender.com/reset-password/${token}`;
     const html = `
       <p>You requested a password reset.</p>
       <p>Click <a href="${resetLink}">here</a> to reset your password.</p>
@@ -39,7 +39,7 @@ module.exports = {
         <div style="padding: 20px;">
           <p>Hi ${username},</p>
           <p>Thanks for signing up. We're excited to have you on board!</p>
-          <a href="http://localhost:8080/login" style="background: #fe424d; padding: 10px 15px; color: white; text-decoration: none; border-radius: 5px;">Log In</a>
+          <a href="https://tripnest-8vo9.onrender.com/login" style="background: #fe424d; padding: 10px 15px; color: white; text-decoration: none; border-radius: 5px;">Log In</a>
         </div>
         <div style="background: #eee; text-align: center; padding: 10px;">
           <small>&copy; 2025 Tripnest. All rights reserved.</small>
