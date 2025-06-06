@@ -12,7 +12,8 @@ body {
 
 /* navbar */
 .trip-navbar-wrapper .navbar {
-  height: 5rem;
+  /* height: 5rem; */
+  height: auto;
   background-color: white;
 }
 
@@ -81,7 +82,6 @@ body {
   font-weight: 500;
   border-radius: 6px;
 }
-
 /* Logout */
 .trip-navbar-wrapper .dropdown-item.logout {
   color: #ff385c;
@@ -92,6 +92,46 @@ body {
   color: #c9243d;
 }
 
+@media (max-width: 768px) {
+  .trip-navbar-wrapper .navbar-nav {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .trip-navbar-wrapper .nav-item.dropdown {
+    align-self: flex-start;
+    width: 100%;
+  }
+
+  .trip-navbar-wrapper .nav-item.dropdown .nav-link {
+    justify-content: flex-start; /* icon + name align left */
+    padding-left: 0.5rem;
+  }
+
+  .trip-navbar-wrapper form[role="search"] {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .trip-navbar-wrapper .search-inp,
+  .trip-navbar-wrapper .search-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 411px) {
+  .trip-navbar-wrapper .search-inp::placeholder {
+    font-size: 13px;
+  }
+
+  .trip-navbar-wrapper .search-btn {
+    font-size: 13px;
+    padding: 0.4rem 1rem;
+  }
+
+  .trip-navbar-wrapper .navbar-brand {
+    font-size: 1rem;
+  }
+}
 /* footer */
 /* footer new */
 .footer {
