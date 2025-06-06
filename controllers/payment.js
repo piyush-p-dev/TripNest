@@ -9,14 +9,24 @@ const User = require("../models/user");
 
 const { sendBookingConfirmation } = require("../utils/sendEmail");
 
-// 🔁 Helper function to check date conflicts for a listing
+// 🔁 Checks if a listing is already booked (paid or recently pending) for the selected dates
 const isOverlapping = async (listingId, checkIn, checkOut) => {
+  // ⏳ Define a threshold time to consider "recent" pending bookings (15 minutes ago)
+  const fifteenMinutesAgo = new Date(Date.now() - 15 * 60 * 1000);
   return await Booking.exists({
-    listing: listingId,
-    status: { $in: ["pending", "paid"] }, // Only check active bookings
+    listing: listingId, // Match the listing being booked
+
+    // 🧠 Use $or to check for either:
     $or: [
       {
-        checkIn: { $lt: new Date(checkOut) },
+        status: "paid", // ✅ Bookings that are already paid (always block dates)
+        checkIn: { $lt: new Date(checkOut) }, // Overlapping date range condition
+        checkOut: { $gt: new Date(checkIn) },
+      },
+      {
+        status: "pending", // ⏳ Only consider recent pending bookings
+        createdAt: { $gt: fifteenMinutesAgo }, // Booking was created within the last 15 minutes
+        checkIn: { $lt: new Date(checkOut) }, // Overlapping date range condition
         checkOut: { $gt: new Date(checkIn) },
       },
     ],
