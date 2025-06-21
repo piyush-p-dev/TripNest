@@ -17,7 +17,7 @@ router.post(
 );
 
 //Delete Review Route
-router.post(
+router.delete(
   "/:reviewId",
   isLoggedIn,
   isReviewAuthor,
